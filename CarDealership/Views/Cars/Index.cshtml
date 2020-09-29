@@ -9,8 +9,16 @@
 <ul>
   @foreach (Car car in Model)
   {
+    @* <li>@car.Details @car.MakeModel, with @car.Miles miles for $@car.Price</li> *@
     <li>@car.Details</li>
+    <ul>
+      <li>Car Make: @car.MakeModel</li>
+      <li>Price: $@car.Price</li>
+      <li>Miles: @car.Miles</li>
+    </ul>
+    <br>
   }
 
 </ul>
 <p><a href="/cars/new">Add another used car</a></p>
+<p><a href="/">Go back to Homepage</a></p>

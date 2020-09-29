@@ -27,5 +27,32 @@ namespace Dealership.Controllers
       Car myCar = new Car(carDetails, carMake, carMiles, carPrice);
       return RedirectToAction("Index");
     }
+
+    [HttpGet("/cars/sale")]
+    public ActionResult Sale()
+    {
+      List<Car> allCars = Car.GetAll();
+      return View(allCars);
+    }
+
+    [HttpPost("/cars/sale")]
+    public ActionResult CreateSale(string maxPriceInput)
+    {
+      int maxPrice = int.Parse(maxPriceInput);
+      List<Car> newSale = Car.GetAll();
+      newSale.WorthBuying(maxPrice);
+      List<Car> CarsMatchingSearch = new List<Car>(0);
+
+      
+      foreach (Car automobile in allCars)
+      {
+        if (automobile.WorthBuying(maxPrice))
+        {
+          CarsMatchingSearch.Add(automobile);
+        }
+      }
+      return View(CarsMatchingSearch);
+    }
+
   }
 }
